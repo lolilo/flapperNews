@@ -5,14 +5,4 @@ angular.module('flapperNews', [])
         };
         return o;
     }])
-
-
-
-.controller('MainCtrl', [
-    '$scope',
-    'posts',
-    function($scope, posts){
-        // bind $scope.posts in controller to
-        // posts array in service
-        $scope.posts = posts.posts;
-    }])
+}]);
