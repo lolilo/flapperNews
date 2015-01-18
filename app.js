@@ -1,4 +1,4 @@
-angular.module('flapperNews', ['ui.router'])
+angular.module('flapperNews', ['ui.router', 'flapperNews.services'])
 .config([
 '$stateProvider',
 '$urlRouterProvider',
@@ -19,13 +19,6 @@ function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('home');
 }])
 
-    .factory('posts', [function(){
-        var o = {
-            posts: []
-        };
-        return o;
-    }])
-
     .controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
         $scope.posts = posts.posts;
         $scope.posts = [
@@ -39,9 +32,13 @@ function($stateProvider, $urlRouterProvider) {
             if (!$scope.title || $scope.title === '') { return; }
             $scope.posts.push(
                 {
-                    title: $scope.title, 
+                    title: $scope.title,
                     link: $scope.link,
-                    upvotes: 0
+                    upvotes: 0,
+                    comments: [
+                      {author: 'Joe', body: 'Cool post!', upvotes: 0},
+                      {author: 'Bob', body: 'Great idea but everything is wrong!', upvotes: 0}
+                    ]
                 }
             );
             $scope.title = '';
